@@ -45,17 +45,19 @@ const PaymentDashboard = () => {
     let toDate: Date = new Date();
     if (from) fromDate = from;
     if (to) toDate = to;
+  
     const filterData = transactionData.filter((transaction) => {
-      const transactionDate = new Date(transaction.date)
-      console.log("Datos", transactionDate.toUTCString(), "from.....", fromDate.toUTCString(), "to....", toDate.toUTCString())
-      if (transactionDate.toUTCString() > fromDate.toUTCString() && transactionDate.toUTCString() < toDate.toUTCString()) {
-        return transaction
+      const transactionDate = new Date(transaction.date);
+  
+      if (transactionDate >= fromDate && transactionDate <= toDate) {
+        return true;
       } else {
-        return false
+        return false;
       }
     });
+  
     setTransactionData(filterData);
-  }, [from, to])
+  }, [from, to]);
 
 
   return (
